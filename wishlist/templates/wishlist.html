@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Nama: </h5>
-<p>{{nama}}</p>
+<h4>Nama: {{nama}}</h4>
 
-<table>
+<table style="width:55%">
     <tr>
     <th>Nama Barang</th>
     <th>Harga Barang</th>
@@ -12,7 +11,7 @@
     </tr>
     {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
     {% for barang in list_barang %}
-    <tr>
+    <tr style=font-size:14px>
         <th>{{barang.nama_barang}}</th>
         <th>{{barang.harga_barang}}</th>
         <th>{{barang.deskripsi}}</th>

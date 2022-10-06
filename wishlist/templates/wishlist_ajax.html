@@ -1,0 +1,68 @@
+<!doctype html> {% extends 'base.html' %}
+
+{% block meta %}
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    //AJAX
+    $(document).ready(function() {
+        $.get("{% url 'wishlist:show_json' %}", function(obj) {
+            var table = [];
+            $.each(obj, function(id, value){
+                var row = [];
+                var fields = value.fields
+                row.push("<td>" + String(value.fields.nama_barang) + "</td>");
+                row.push("<td>" + String(value.fields.harga_barang) + "</td>");
+                row.push("<td>" + String(value.fields.deskripsi) + "</td>");
+                table.push("<tr>" + row.join("") + "</tr>");
+            });
+            document.getElementById("list_barang").append = table.join("");              
+        });
+    });
+ </script>
+ {% endblock meta %}
+
+{% block content %}
+<nav class="navbar
+            navbar-dark
+            bg-danger
+            nav-pills
+            nav-fill">
+    <div class="container-fluid">
+        <span class="navbar-brand h1"> Vinsen Wijaya</span>
+        <a class="btn btn-warning" role="button" href="{% url 'wishlist:logout' %}"> Logout </a>
+    </div>
+  </nav>
+
+<br></br>
+<figure class="p-3">
+    <table class="table
+                table-info
+                table-sm
+                table-striped
+                p-20">
+
+        <tr>
+        <th>Nama Barang</th>
+        <th>Harga Barang</th>
+        <th>Deskripsi</th>
+        </tr>
+
+        <div id = "list_barang">
+        {% for barang in list_barang %}
+            <tr style=font-size:14px>
+                <th>{{barang.nama_barang}}</th>
+                <th>{{barang.harga_barang}}</th>
+                <th>{{barang.deskripsi}}</th>
+            </tr>
+        </div>
+    {% endfor %}
+    </table>
+</figure>
+
+<figure class = "text-center">
+    <span class="badge text-bg-danger"> Sesi terakhir login: </span>
+    <span class="badge text-bg-warning"> {{ last_login }} </span>
+</figure>
+{% endblock content %}
